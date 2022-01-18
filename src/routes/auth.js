@@ -12,7 +12,7 @@ router.post(
     check(
       "password",
       "Пароль должен быть больше 4 и меньше 18 символов"
-    ).isLength({ min: 4, max: 18 }),
+    ).isLength({ min: 8, max: 20 }),
   ],
   auth.registration
 );

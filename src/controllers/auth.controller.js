@@ -2,6 +2,7 @@ const { User, Role } = require("../model");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { validationResult } = require("express-validator");
+const boom = require("boom");
 const { secret } = require("../../config");
 const generateAccessToken = (id, roles) => {
   const payload = {
@@ -16,9 +17,7 @@ const authController = () => ({
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
-        return res
-          .status(400)
-          .json({ message: "Ошибка при регистрации", errors });
+        return res.status(400).json({ errors: errors.array() });
       }
       const { username, password } = req.body;
       const candidate = await User.findOne({ username });

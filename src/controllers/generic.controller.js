@@ -18,9 +18,7 @@ const genericCrud = (model) => ({
     }
   },
   async create({ body }, res) {
-    // title: Contrlo
     try {
-      console.log(body);
       const item = new model(body);
       const newItem = await item.save();
       return res.status(200).send(newItem);
@@ -29,7 +27,6 @@ const genericCrud = (model) => ({
     }
   },
   async update({ params: { id }, body }, res) {
-    // title: Control
     try {
       const item = await model.findByIdAndUpdate(id, body, { new: true });
       return res.status(200).send(item);
